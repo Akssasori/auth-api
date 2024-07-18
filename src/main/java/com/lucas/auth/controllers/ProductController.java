@@ -1,15 +1,15 @@
 package com.lucas.auth.controllers;
 
-import com.lucas.auth.models.Product;
+import com.lucas.auth.mappers.ProductMapper;
+import com.lucas.auth.records.ProductRequestRecord;
 import com.lucas.auth.records.ProductResponseRecord;
 import com.lucas.auth.services.ProductService;
-import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
@@ -25,15 +25,24 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductResponseRecord>> findALl() {
+        return ResponseEntity.ok().body(ProductMapper.toListResponseRecord(productService.findAll()));
+    }
 
-        List<ProductResponseRecord> productResponseRecords = new ArrayList<>();
+    @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductResponseRecord> save(@RequestBody ProductRequestRecord productRequestRecord) {
+        var product = ProductMapper.toProduct(productRequestRecord);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ProductMapper.toResponseRecord(productService.save(product)));
 
-        productService.findAll().forEach(product -> {
-            var productResponseRecord = new ProductResponseRecord(product.getName(), product.getPrice(), product.getAmount());
-            productResponseRecords.add(productResponseRecord);
-        });
+    }
 
+    @GetMapping("{id}")
+    public ResponseEntity<ProductResponseRecord> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(ProductMapper.toResponseRecord(productService.findById(id)));
+    }
 
-        return ResponseEntity.ok().body(productResponseRecords);
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteById(@PathVariable Long id) {
+        productService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

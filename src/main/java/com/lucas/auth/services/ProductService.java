@@ -18,16 +18,21 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> findById(Long id) {
+    public Product findById(Long id) {
 
         Optional<Product> product = productRepository.findById(id);
 
         if (product.isEmpty()) throw new RuntimeException("Produto não localizado");
 
-        return product;
+        return product.get();
     }
 
     public Product save (Product product) {
         return productRepository.save(product);
+    }
+
+    public void deleteById(Long id){
+        boolean existsById = productRepository.existsById(id);
+        if (existsById) productRepository.deleteById(id);
     }
 }
