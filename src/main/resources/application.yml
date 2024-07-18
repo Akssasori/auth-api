@@ -1,5 +1,5 @@
 server:
-  port: 7070
+  port: 1234
 
 spring:
   application:
@@ -17,3 +17,7 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true

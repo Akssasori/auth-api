@@ -1,0 +1,7 @@
+CREATE TABLE product (
+    id BIGSERIAL NOT NULL,
+    name varchar(255) NOT NULL,
+    price DOUBLE PRECISION DEFAULT NULL,
+    amount INTEGER DEFAULT NULL,
+    PRIMARY KEY (id)
+);
