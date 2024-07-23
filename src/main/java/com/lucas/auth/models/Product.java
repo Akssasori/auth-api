@@ -1,6 +1,6 @@
 package com.lucas.auth.models;
 
-import com.lucas.auth.records.ProductRequestRecord;
+import com.lucas.auth.dtos.ProductRequestRecord;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

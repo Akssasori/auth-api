@@ -1,4 +1,4 @@
-package com.lucas.auth.services;
+package com.lucas.auth.infro.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -32,7 +32,7 @@ public class TokenService {
 
     }
 
-    public String verifyToken(String token) {
+    public String validateToken(String token) {
         try {
             Algorithm algoritm = Algorithm.HMAC256(secret);
             return JWT.require(algoritm)

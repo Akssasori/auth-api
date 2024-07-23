@@ -1,4 +1,4 @@
-package com.lucas.auth.records;
+package com.lucas.auth.dtos;
 
 public record ProductResponseRecord(
         String name,

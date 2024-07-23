@@ -1,8 +1,8 @@
 package com.lucas.auth.controllers;
 
 import com.lucas.auth.mappers.ProductMapper;
-import com.lucas.auth.records.ProductRequestRecord;
-import com.lucas.auth.records.ProductResponseRecord;
+import com.lucas.auth.dtos.ProductRequestRecord;
+import com.lucas.auth.dtos.ProductResponseRecord;
 import com.lucas.auth.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +28,7 @@ public class ProductController {
         return ResponseEntity.ok().body(ProductMapper.toListResponseRecord(productService.findAll()));
     }
 
-    @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductResponseRecord> save(@RequestBody ProductRequestRecord productRequestRecord) {
         var product = ProductMapper.toProduct(productRequestRecord);
         return ResponseEntity.status(HttpStatus.CREATED).body(ProductMapper.toResponseRecord(productService.save(product)));

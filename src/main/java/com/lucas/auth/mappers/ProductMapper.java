@@ -1,8 +1,8 @@
 package com.lucas.auth.mappers;
 
 import com.lucas.auth.models.Product;
-import com.lucas.auth.records.ProductRequestRecord;
-import com.lucas.auth.records.ProductResponseRecord;
+import com.lucas.auth.dtos.ProductRequestRecord;
+import com.lucas.auth.dtos.ProductResponseRecord;
 
 import java.util.ArrayList;
 import java.util.List;
